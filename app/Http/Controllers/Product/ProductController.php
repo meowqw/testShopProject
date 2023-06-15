@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Product\CreateProductValidator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,18 +16,18 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        dd('index');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(CreateProductValidator $request)
     {
-        //
+        return $request;
     }
 
     /**
