@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\CreateProductValidator;
+use App\Jobs\NewProductJob;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -23,10 +25,12 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return CreateProductValidator|\Illuminate\Http\JsonResponse|Request
      */
     public function store(CreateProductValidator $request)
     {
+        Log::channel('custom')->alert('message');
+        dispatch(new NewProductJob());
         return $request;
     }
 
