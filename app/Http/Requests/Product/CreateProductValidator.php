@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Product;
 
+use App\Rules\CostumRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateProductValidator extends FormRequest
@@ -28,7 +29,7 @@ class CreateProductValidator extends FormRequest
             'description' => 'required|string',
             'price' => 'required|numeric|between:1,9999999',
             'barcode_id' => 'required|integer',
-            'category_id' => 'required|integer',
+            'category_id' => ['required', new CostumRule],
             'tags' => 'array'
         ];
     }
@@ -48,8 +49,7 @@ class CreateProductValidator extends FormRequest
             'price.between' => 'Сумма товара должна быть от :min до :max',
             'barcode_id.required' => 'Поле :attribute обязательно',
             'barcode_id.integer' => 'Поле должно быть числом',
-            'category.integer' => 'Поле должно быть числом',
-            'category.required' => 'Поле :attribute обязательно',
+            'category_id.required' => 'Поле :attribute обязательно',
             'tags.array' => 'Поле должно быть массивом',
         ];
     }
